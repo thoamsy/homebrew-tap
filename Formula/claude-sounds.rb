@@ -5,6 +5,9 @@ class ClaudeSounds < Formula
   license "MIT"
 
   def install
+    # Bun is often installed outside Homebrew (curl installer puts it in ~/.bun/bin)
+    ENV.prepend_path "PATH", "#{Dir.home}/.bun/bin"
+
     odie "bun is required but not found. Install it: curl -fsSL https://bun.sh/install | bash" unless which("bun")
 
     system "bun", "install"
