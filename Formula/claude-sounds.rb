@@ -4,13 +4,12 @@ class ClaudeSounds < Formula
   url "https://github.com/thoamsy/claude-sounds.git", tag: "v0.2.0"
   license "MIT"
 
-  depends_on "oven-sh/bun/bun"
-
   def install
+    odie "bun is required but not found. Install it: curl -fsSL https://bun.sh/install | bash" unless which("bun")
+
     system "bun", "install"
     libexec.install "index.ts", "src", "node_modules", "package.json"
-    (bin/"claude-sounds").write_env_script libexec/"index.ts",
-      PATH: "#{Formula["oven-sh/bun/bun"].opt_bin}:${PATH}"
+    (bin/"claude-sounds").write_env_script libexec/"index.ts"
   end
 
   def caveats
@@ -21,6 +20,6 @@ class ClaudeSounds < Formula
   end
 
   test do
-    assert_match version.to_s, shell_output("#{bin}/claude-sounds --version").strip
+    assert_match version.to_s, shell_output("#{bin}/claude-sounds version").strip
   end
 end
