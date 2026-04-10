@@ -12,7 +12,10 @@ class ClaudeSounds < Formula
 
     system "bun", "install"
     libexec.install "index.ts", "src", "node_modules", "package.json"
-    (bin/"claude-sounds").write_env_script libexec/"index.ts"
+    (bin/"claude-sounds").write <<~SH
+      #!/bin/bash
+      exec bun "#{libexec}/index.ts" "$@"
+    SH
   end
 
   def caveats
