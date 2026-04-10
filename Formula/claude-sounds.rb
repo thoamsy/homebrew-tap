@@ -4,10 +4,10 @@ class ClaudeSounds < Formula
   url "https://github.com/thoamsy/claude-sounds.git", tag: "v0.2.0"
   license "MIT"
 
-  def install
-    # Bun is often installed outside Homebrew (curl installer puts it in ~/.bun/bin)
-    ENV.prepend_path "PATH", "#{Dir.home}/.bun/bin"
+  # Use standard env so non-Homebrew bun (e.g. ~/.bun/bin) is found
+  env :std
 
+  def install
     odie "bun is required but not found. Install it: curl -fsSL https://bun.sh/install | bash" unless which("bun")
 
     system "bun", "install"
