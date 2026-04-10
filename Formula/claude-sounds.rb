@@ -8,7 +8,16 @@ class ClaudeSounds < Formula
 
   def install
     system "bun", "install"
-    system "bun", "build", "./index.ts", "--compile", "--outfile", bin/"claude-sounds"
+    libexec.install "index.ts", "src", "node_modules", "package.json"
+    (bin/"claude-sounds").write_env_script libexec/"index.ts",
+      PATH: "#{Formula["oven-sh/bun/bun"].opt_bin}:${PATH}"
+  end
+
+  def caveats
+    <<~EOS
+      Run 'claude-sounds init' to set up sound hooks in Claude Code.
+      Import a theme: claude-sounds import theme.zip
+    EOS
   end
 
   test do
