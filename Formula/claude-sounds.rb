@@ -1,7 +1,7 @@
 class ClaudeSounds < Formula
   desc "Sound themes for Claude Code"
   homepage "https://github.com/thoamsy/claude-sounds"
-  url "https://github.com/thoamsy/claude-sounds.git", tag: "v0.2.0"
+  url "https://github.com/thoamsy/claude-sounds.git", tag: "v0.3.0"
   license "MIT"
 
   # Use standard env so non-Homebrew bun (e.g. ~/.bun/bin) is found
